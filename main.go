@@ -94,5 +94,5 @@ func main() {
 
 	endTime := time.Now()
 	elapsedTime := endTime.Sub(startTime)
-	fmt.Printf("程序运行时间：%s", elapsedTime)
+	fmt.Printf("\n程序运行时间：%s", elapsedTime)
 }
