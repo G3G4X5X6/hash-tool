@@ -8,33 +8,34 @@ import (
 	"core"
 )
 
-func banner() {
-}
+//
+//func banner() {
+//	banner := `
+// _     ____  ____  _         _____  ____  ____  _
+/// \ /|/  _ \/ ___\/ \ /|    /__ __\/  _ \/  _ \/ \
+//| |_||| / \||    \| |_||_____ / \  | / \|| / \|| |
+//| | ||| |-||\___ || | ||\____\| |  | \_/|| \_/|| |_/\
+//\_/ \|\_/ \|\____/\_/ \|      \_/  \____/\____/\____/
+//
+//`
+//	fmt.Print(banner)
+//}
 
 var (
 	enableAlgorithms cli.StringSlice
-	filePath         cli.StringSlice
+	threads          int
 )
 
 func initParam() {
-}
-
-func control() {
-	// TODO 核心
-	//fmt.Println(enableAlgorithms.Value())
 }
 
 func main() {
 	initParam()
 	app := &cli.App{
 		EnableBashCompletion: true,
-		Name:                 "core",
+		Name:                 "hash",
 		Usage:                "calculate the core value of a file or string",
 		Action: func(*cli.Context) error {
-			banner()
-
-			control()
-
 			return nil
 		},
 		Commands: []*cli.Command{
@@ -56,10 +57,20 @@ func main() {
 				Destination: &enableAlgorithms,
 			},
 			&cli.StringSliceFlag{
-				Name:        "path",
-				Aliases:     []string{"p"},
-				Usage:       "file path",
-				Destination: &filePath,
+				Name:    "path",
+				Aliases: []string{"p"},
+				Usage:   "file path",
+				Action: func(context *cli.Context, strings []string) error {
+					core.FilesHashReport(strings, enableAlgorithms.Value(), threads)
+					return nil
+				},
+			},
+			&cli.IntFlag{
+				Name:        "thread",
+				Value:       6,
+				Aliases:     []string{"t"},
+				Usage:       "number of threads",
+				Destination: &threads,
 			},
 			&cli.StringFlag{
 				Name:    "string",
