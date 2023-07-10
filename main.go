@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"github.com/urfave/cli/v2"
 	"log"
 	"os"
@@ -22,7 +21,7 @@ func initParam() {
 
 func control() {
 	// TODO 核心
-	fmt.Println(enableAlgorithms.Value())
+	//fmt.Println(enableAlgorithms.Value())
 }
 
 func main() {
@@ -52,7 +51,7 @@ func main() {
 			&cli.StringSliceFlag{
 				Name:        "enable",
 				Aliases:     []string{"e"},
-				Value:       cli.NewStringSlice("md5", "sha1", "sha256", "sha512"),
+				Value:       cli.NewStringSlice("crc32", "md5", "sha1", "sha256", "sha512"),
 				Usage:       "enabled hashing algorithms",
 				Destination: &enableAlgorithms,
 			},
