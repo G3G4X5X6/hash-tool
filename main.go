@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"github.com/urfave/cli/v2"
 	"log"
 	"os"
+	"time"
 
 	"core"
 )
@@ -30,6 +32,8 @@ func initParam() {
 }
 
 func main() {
+	startTime := time.Now()
+
 	initParam()
 	app := &cli.App{
 		EnableBashCompletion: true,
@@ -87,4 +91,8 @@ func main() {
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
 	}
+
+	endTime := time.Now()
+	elapsedTime := endTime.Sub(startTime)
+	fmt.Printf("程序运行时间：%s", elapsedTime)
 }
