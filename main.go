@@ -4,10 +4,9 @@ import (
 	"fmt"
 	"github.com/urfave/cli/v2"
 	"log"
+	"main/core"
 	"os"
 	"time"
-
-	"core"
 )
 
 //
@@ -94,5 +93,5 @@ func main() {
 
 	endTime := time.Now()
 	elapsedTime := endTime.Sub(startTime)
-	fmt.Printf("\n程序运行时间：%s", elapsedTime)
+	fmt.Printf("\nProgram runtime: %s", elapsedTime)
 }

@@ -199,7 +199,7 @@ func FilesHashReport(paths []string, algorithms []string, threads int) string {
 	}()
 
 	// 线程数控制
-	fmt.Println(threads)
+	//fmt.Println(threads)
 	var threadsChan = make(chan int, threads)
 	for path := range pathChan {
 		threadsChan <- 1
