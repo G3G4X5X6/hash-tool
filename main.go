@@ -46,7 +46,7 @@ func main() {
 				Name:  "string",
 				Usage: "computes a string core",
 				Action: func(cCtx *cli.Context) error {
-					// TODO
+					fmt.Println("--string value, -s value                               computes a string core")
 					return nil
 				},
 			},
