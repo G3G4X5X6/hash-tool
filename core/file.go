@@ -125,6 +125,7 @@ func CalculateFileSHA512(filePath string) (string, error) {
 }
 
 func fileHash(filePath string, algorithms []string, threadsChan *chan int) {
+
 	var fileResult Result
 	fileResult.text = filePath
 
@@ -179,7 +180,6 @@ func fileHash(filePath string, algorithms []string, threadsChan *chan int) {
 }
 
 func FilesHashReport(paths []string, algorithms []string, threads int) string {
-
 	var pathChan = make(chan string, 20)
 
 	go func() {
@@ -199,12 +199,10 @@ func FilesHashReport(paths []string, algorithms []string, threads int) string {
 	}()
 
 	// 线程数控制
-	//fmt.Println(threads)
 	var threadsChan = make(chan int, threads)
 	for path := range pathChan {
 		threadsChan <- 1
 		go fileHash(path, algorithms, &threadsChan)
-		fmt.Println(path)
 	}
 
 	for {

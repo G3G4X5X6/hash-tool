@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/fatih/color"
+	"github.com/schollz/progressbar/v3"
 	"github.com/urfave/cli/v2"
 	"log"
 	"main/core"
@@ -28,29 +29,15 @@ var (
 	threads          int
 )
 
-func initParam() {
-}
-
 func main() {
 	startTime := time.Now()
 
-	initParam()
 	app := &cli.App{
 		EnableBashCompletion: true,
 		Name:                 "hash",
 		Usage:                "calculate the core value of a file or string",
 		Action: func(*cli.Context) error {
 			return nil
-		},
-		Commands: []*cli.Command{
-			{
-				Name:  "string",
-				Usage: "computes a string core",
-				Action: func(cCtx *cli.Context) error {
-					fmt.Println("--string value, -s value                               computes a string core")
-					return nil
-				},
-			},
 		},
 		Flags: []cli.Flag{
 			&cli.StringSliceFlag{
@@ -88,7 +75,15 @@ func main() {
 		},
 	}
 
+	go func() {
+		bar := progressbar.Default(-1, "Hashing......")
+		for {
+			_ = bar.Add(1)
+		}
+	}()
+
 	if err := app.Run(os.Args); err != nil {
+
 		log.Fatal(err)
 	}
 

@@ -18,6 +18,7 @@ type Result struct {
 func (reportMsg Result) toString() {
 	cyan := color.New(color.FgCyan).SprintFunc()
 	red := color.New(color.FgRed).SprintFunc()
+	fmt.Println()
 	color.Cyan("——————————————————————————————————————————————————————————")
 	fmt.Printf("%s: %s\n", red("Text"), cyan(reportMsg.text))
 	color.Cyan("——————————————————————————————————————————————————————————")
@@ -29,5 +30,4 @@ func (reportMsg Result) toString() {
 	fmt.Println("sha512:\t", strings.ToUpper(reportMsg.sha512))
 
 	color.Cyan("——————————————————————————————————————————————————————————")
-	fmt.Println()
 }
