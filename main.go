@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/fatih/color"
 	"github.com/urfave/cli/v2"
 	"log"
 	"main/core"
@@ -93,5 +94,7 @@ func main() {
 
 	endTime := time.Now()
 	elapsedTime := endTime.Sub(startTime)
-	fmt.Printf("\nProgram runtime: %s", elapsedTime)
+	fmt.Printf("\nProgram runtime: %s\n", elapsedTime)
+	color.Cyan("——————————————————————————————————————————————————————————\n\n")
+
 }

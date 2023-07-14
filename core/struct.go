@@ -29,4 +29,5 @@ func (reportMsg Result) toString() {
 	fmt.Println("sha512:\t", strings.ToUpper(reportMsg.sha512))
 
 	color.Cyan("——————————————————————————————————————————————————————————")
+	fmt.Println()
 }
