@@ -2,12 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/fatih/color"
 	"github.com/urfave/cli/v2"
 	"log"
 	"main/core"
 	"os"
-	"time"
 )
 
 var version = "1.0.0"
@@ -18,15 +16,13 @@ var (
 )
 
 func main() {
-	startTime := time.Now()
 
 	app := &cli.App{
-		EnableBashCompletion: true,
-		Name:                 "hash",
-		Usage:                "calculate the core value of a file or string",
-		Action: func(*cli.Context) error {
-			return nil
-		},
+		EnableBashCompletion:  true,
+		Name:                  "hash",
+		Usage:                 "calculate the core value of a file or string",
+		Version:               "v" + version,
+		CustomAppHelpTemplate: fmt.Sprintf("%s\n%s", getBanner(), cli.AppHelpTemplate),
 		Flags: []cli.Flag{
 			&cli.StringSliceFlag{
 				Name:        "enable",
@@ -67,15 +63,16 @@ func main() {
 
 		log.Fatal(err)
 	}
+}
 
-	fmt.Println()
-	color.Cyan("——————————————————————————————————————————————————————————")
-	fmt.Println("v", version)
-	color.Cyan("——————————————————————————————————————————————————————————")
-
-	endTime := time.Now()
-	elapsedTime := endTime.Sub(startTime)
-	fmt.Printf("Program runtime: %s\n", elapsedTime)
-	color.Cyan("——————————————————————————————————————————————————————————\n\n")
-
+func getBanner() string {
+	return `
+ ██      ██                   ██     
+░██     ░██                  ░██     
+░██     ░██  ██████    ██████░██     
+░██████████ ░░░░░░██  ██░░░░ ░██████ 
+░██░░░░░░██  ███████ ░░█████ ░██░░░██
+░██     ░██ ██░░░░██  ░░░░░██░██  ░██
+░██     ░██░░████████ ██████ ░██  ░██
+░░      ░░  ░░░░░░░░ ░░░░░░  ░░   ░░` + "\tv" + version + "\n"
 }

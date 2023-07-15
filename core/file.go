@@ -7,12 +7,14 @@ import (
 	"crypto/sha512"
 	"encoding/hex"
 	"fmt"
+	"github.com/fatih/color"
 	"github.com/schollz/progressbar/v3"
 	"hash/crc32"
 	"io"
 	"os"
 	"path/filepath"
 	"strconv"
+	"time"
 )
 
 func CalculateFileCRC32(filePath string) (string, error) {
@@ -182,6 +184,8 @@ func fileHash(filePath string, algorithms []string, threadsChan *chan int) {
 
 func FilesHashReport(paths []string, algorithms []string, threads int) string {
 
+	startTime := time.Now()
+
 	go func() {
 		bar := progressbar.Default(-1, "Hashing......")
 		for {
@@ -220,5 +224,10 @@ func FilesHashReport(paths []string, algorithms []string, threads int) string {
 		}
 	}
 
+	fmt.Println()
+	endTime := time.Now()
+	elapsedTime := endTime.Sub(startTime)
+	fmt.Printf("Program runtime: %s\n", elapsedTime)
+	color.Cyan("——————————————————————————————————————————————————————————\n\n")
 	return ""
 }
