@@ -15,6 +15,33 @@
 5. CRC (Cyclic Redundancy Check)
     - 一种较为简单的哈希算法，输出结果为32位二进制数，通常用于校验数据的完整性和传输错误检测。
 
+### :camera: 使用帮助
+```bash
+PS E:\0x02.GitHub\hash-tool\bin> .\hash-windows-amd64.exe -h                                                                                                                                                   
+NAME:
+   hash - calculate the core value of a file or string
+
+USAGE:
+   hash [global options] command [command options] [arguments...]
+
+COMMANDS:
+   help, h  Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+   --enable value, -e value [ --enable value, -e value ]  enabled hashing algorithms (default: "crc32", "md5", "sha1", "sha256", "sha512")
+   --path value, -p value [ --path value, -p value ]      file path
+   --thread value, -t value                               number of threads (default: 6)
+   --string value, -s value                               computes a string core
+   --help, -h                                             show help
+
+——————————————————————————————————————————————————————————
+v 1.0.0
+——————————————————————————————————————————————————————————
+Program runtime: 3.7783ms
+——————————————————————————————————————————————————————————
+
+```
+
 ### :rocket: 使用示例
 
 #### 计算 `字符串` 哈希
