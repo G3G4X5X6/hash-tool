@@ -7,6 +7,7 @@ import (
 	"crypto/sha512"
 	"encoding/hex"
 	"fmt"
+	"github.com/schollz/progressbar/v3"
 	"hash/crc32"
 	"io"
 	"os"
@@ -180,6 +181,14 @@ func fileHash(filePath string, algorithms []string, threadsChan *chan int) {
 }
 
 func FilesHashReport(paths []string, algorithms []string, threads int) string {
+
+	go func() {
+		bar := progressbar.Default(-1, "Hashing......")
+		for {
+			_ = bar.Add(1)
+		}
+	}()
+
 	var pathChan = make(chan string, 20)
 
 	go func() {

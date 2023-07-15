@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/fatih/color"
-	"github.com/schollz/progressbar/v3"
 	"github.com/urfave/cli/v2"
 	"log"
 	"main/core"
@@ -11,18 +10,7 @@ import (
 	"time"
 )
 
-//
-//func banner() {
-//	banner := `
-// _     ____  ____  _         _____  ____  ____  _
-/// \ /|/  _ \/ ___\/ \ /|    /__ __\/  _ \/  _ \/ \
-//| |_||| / \||    \| |_||_____ / \  | / \|| / \|| |
-//| | ||| |-||\___ || | ||\____\| |  | \_/|| \_/|| |_/\
-//\_/ \|\_/ \|\____/\_/ \|      \_/  \____/\____/\____/
-//
-//`
-//	fmt.Print(banner)
-//}
+var version = "1.0.0"
 
 var (
 	enableAlgorithms cli.StringSlice
@@ -75,21 +63,18 @@ func main() {
 		},
 	}
 
-	go func() {
-		bar := progressbar.Default(-1, "Hashing......")
-		for {
-			_ = bar.Add(1)
-		}
-	}()
-
 	if err := app.Run(os.Args); err != nil {
 
 		log.Fatal(err)
 	}
 
+	fmt.Printf("\n\n")
+	fmt.Println("v", version)
+	color.Cyan("——————————————————————————————————————————————————————————")
+
 	endTime := time.Now()
 	elapsedTime := endTime.Sub(startTime)
-	fmt.Printf("\nProgram runtime: %s\n", elapsedTime)
+	fmt.Printf("Program runtime: %s\n", elapsedTime)
 	color.Cyan("——————————————————————————————————————————————————————————\n\n")
 
 }
