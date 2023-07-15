@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/fatih/color"
 	"github.com/urfave/cli/v2"
 	"log"
 	"main/core"
@@ -22,7 +23,16 @@ func main() {
 		Name:                  "hash",
 		Usage:                 "calculate the core value of a file or string",
 		Version:               "v" + version,
-		CustomAppHelpTemplate: fmt.Sprintf("%s\n%s", getBanner(), cli.AppHelpTemplate),
+		CustomAppHelpTemplate: fmt.Sprintf("%s\n%s\n", getBanner(), cli.AppHelpTemplate),
+		Action: func(context *cli.Context) error {
+			if len(os.Args) == 1 {
+				err := cli.ShowAppHelp(context)
+				if err != nil {
+					return err
+				}
+			}
+			return nil
+		},
 		Flags: []cli.Flag{
 			&cli.StringSliceFlag{
 				Name:        "enable",
@@ -66,6 +76,10 @@ func main() {
 }
 
 func getBanner() string {
+	yellow := color.New(color.FgYellow).SprintFunc()
+	green := color.New(color.FgGreen).SprintFunc()
+	cyan := color.New(color.FgCyan).SprintFunc()
+	red := color.New(color.FgRed).SprintFunc()
 	return `
  ██      ██                   ██     
 ░██     ░██                  ░██     
@@ -74,5 +88,11 @@ func getBanner() string {
 ░██░░░░░░██  ███████ ░░█████ ░██░░░██
 ░██     ░██ ██░░░░██  ░░░░░██░██  ░██
 ░██     ░██░░████████ ██████ ░██  ░██
-░░      ░░  ░░░░░░░░ ░░░░░░  ░░   ░░` + "\tv" + version + "\n"
+░░      ░░  ░░░░░░░░ ░░░░░░  ░░   ░░` +
+		"\n" +
+		green("v"+version) +
+		"\n" +
+		red("Powered by ") + cyan("G3G4X5X6") +
+		"\n" +
+		yellow("——————————————————————————————————————————————————————————")
 }
