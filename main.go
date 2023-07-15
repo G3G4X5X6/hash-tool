@@ -68,7 +68,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("\n\n")
+	fmt.Println()
+	color.Cyan("——————————————————————————————————————————————————————————")
 	fmt.Println("v", version)
 	color.Cyan("——————————————————————————————————————————————————————————")
 
